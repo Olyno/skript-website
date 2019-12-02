@@ -1,0 +1,3 @@
+[submodule "src/skript-website-public"]
+	path = src/skript-website-public
+	url = https://github.com/Olyno/skript-website-public.git

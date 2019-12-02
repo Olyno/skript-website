@@ -1,0 +1,31 @@
+name: skript-website
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Checkout submodules
+      run: |
+        git submodule init
+        git submodule update
+
+    - name: Setup NodeJS environement
+    - uses: actions/setup-node@1
+      with:
+        node-version: '10.x'
+
+    - name: Build Website
+      run: yarn export
+    
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@master
+      env:
+        EMAIL: ${{ secrets.EMAIL }}
+        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BUILD_DIR: __sapper__/export
