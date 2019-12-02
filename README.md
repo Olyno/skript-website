@@ -33,19 +33,22 @@ It will generate the website as static website at ``__sapper__/export``.
 
 ### Edit documentation
 
- 1. Replace ``/src/utils/docs.json`` file with the new one
- 2. Enjoy!
+ 1. Go in [skript-website-public](https://github.com/Olyno/skript-website-public) repository
+ 2. Replace ``docs.json`` file with the new one
+ 3. Enjoy!
 
 ### Add a contributor
 
- 1. Go in the ``/src/utils/developers.json`` file
- 2. Like others, add yours
- 3. Enjoy!
+ 1. Go in [skript-website-public](https://github.com/Olyno/skript-website-public) repository
+ 2. Go in the ``developers.json`` file
+ 3. Like others, add yours
+ 4. Enjoy!
 
 ### Add a tutorial
 
- 1. Go in the ``/src/utils/tutorials.json`` file
- 2. Like others, add yours
- 3. Go in the ``/src/routes/tutorials`` directory
- 4. Like others, write your tutorial page
- 5. Enjoy!
+ 1. Go in [skript-website-public](https://github.com/Olyno/skript-website-public) repository
+ 2. Go in the ``tutorials.json`` file
+ 3. Like others, add yours
+ 4. Go in the ``tutorials`` directory
+ 5. Like others, write your tutorial page
+ 6. Enjoy!
