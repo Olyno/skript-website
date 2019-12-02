@@ -20,6 +20,7 @@ jobs:
       with:
         node-version: '10.x'
 
+    - name: Restore cache
     - uses: actions/cache@v1
       id: cache-modules
       with:
