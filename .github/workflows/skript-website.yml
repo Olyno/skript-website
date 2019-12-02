@@ -16,7 +16,7 @@ jobs:
         git submodule update
 
     - name: Setup NodeJS environement
-    - uses: actions/setup-node@1
+      uses: actions/setup-node@1
       with:
         node-version: '10.x'
 
