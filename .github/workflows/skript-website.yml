@@ -1,4 +1,4 @@
-name: skript-website
+name: Build
 
 on: [push]
 
@@ -20,7 +20,6 @@ jobs:
       with:
         node-version: '10.x'
 
-    - name: Restore cache
     - uses: actions/cache@v1
       id: cache-modules
       with:
@@ -41,4 +40,4 @@ jobs:
       env:
         EMAIL: ${{ secrets.EMAIL }}
         GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BUILD_DIR: __sapper__/export
+        BUILD_DIR: __sapper__/export/
