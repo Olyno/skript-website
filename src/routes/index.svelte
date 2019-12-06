@@ -125,7 +125,7 @@
 						<div class="columns wrap has-text-centered">
 							{#each Object.keys(developers) as devName}
 								<div class="column is-3">
-									<Card class="developer-card" withoutTitle={true} image="{developers[devName].avatar}">
+									<Card class="developer-card" isSquare={true} withoutTitle={true} image="{developers[devName].avatar}">
 										<div class="media">
 											<div class="media-content has-text-centered">
 												<a href="{developers[devName].github}" class="subtitle"><strong>{devName}</strong></a>
