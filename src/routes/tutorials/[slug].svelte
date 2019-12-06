@@ -9,8 +9,8 @@
 		const tutorial = {
 			title: firstLetterUpperCase(slug.replace(/_/g, ' ')),
 			content: tutorials[slug]
-				.replace(/\<h1\>/g, '<h1 class="title">')
-				.replace(/\<h2\>/g, '<h2 class="subtitle">')
+				.replace(/\<h1\>/g, '<h1 class="title top">')
+				.replace(/\<h2\>/g, '<h2 class="subtitle top">')
 				.replace(/(\<pre class="skript-code"\>)/g, '<div class="small-section">$1')
 				.replace(/(<\/pre\>)/g, '$1</div>')
 				.replace(/(<\/p\>)/g, '$1</div>')
@@ -33,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<title>{tutorial.title}</title>
+	<title>Tutorial: {tutorial.title} - Skript</title>
 </svelte:head>
 
 {#if tutorial.content}
