@@ -36,8 +36,15 @@ jobs:
       run: yarn export
     
     - name: Deploy to GitHub Pages
-      uses: Cecilapp/GitHub-Pages-deploy@master
+      run: |
+        cd __sapper__/export__/skript-website
+        git init
+        git config --global user.email "${EMAIL}"
+        git remote add origin https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        git checkout -b gh-pages
+        git add .
+        git commit -m "Build website"
+        git push origin gh-pages -f
       env:
         EMAIL: ${{ secrets.EMAIL }}
-        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BUILD_DIR: __sapper__/export/
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
