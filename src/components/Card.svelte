@@ -6,9 +6,11 @@
 	export let id = "";
 	export let image = "";
 	export let withoutTitle = false;
+	export let isSquare = false;
 	export { clazz as class };
 
 	const dispatch = createEventDispatcher();
+	const squareSize = '189.17';
 
 	onMount(async () => {
 		dispatch('mount');
@@ -19,9 +21,7 @@
 <div class="card {clazz}" {id}>
 	{#if image !== ""}
 		<div class="card-image">
-			<figure class="image">
-				<img src="{image}" alt="Placeholder image">
-			</figure>
+			<img src="{image}" width={isSquare ? squareSize : ''} height={isSquare ? squareSize : ''} alt="Placeholder image">
 		</div>
 	{/if}
 	<header class="card-header">
