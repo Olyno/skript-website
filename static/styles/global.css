@@ -1,4 +1,8 @@
-body { background-color: #d6de79; }
+html, body {
+	height: 100%;
+	margin: 0;
+	background-color: #d6de79 !important;
+}
 
 .has-yellow-border {
 	border-style: solid;
@@ -18,3 +22,5 @@ p, a { font-size: 17px; }
 
 .wrap { flex-wrap: wrap; }
 .developer-card { margin-bottom: 25px; }
+
+.footer { padding: 2rem 1.5rem 2rem !important; flex-grow: 1; }
