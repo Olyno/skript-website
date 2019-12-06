@@ -8,11 +8,14 @@
 
 	export let docType;
 
-	let searchValue = '';
+	let searchValue = '',
+		error;
 
 	async function setupListeners() {
 		document.getElementsByClassName('search-input')[0].addEventListener('keyup', async () => {
-			search(searchValue);
+			error = undefined;
+			search(searchValue)
+				.catch(() => error = 'Nothing found');
 		})
 	}
 
@@ -24,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<title>{firstLetterUpperCase(docType)}</title>
+	<title>Documentation: {firstLetterUpperCase(docType)}</title>
 </svelte:head>
 
 <div class="section top">
@@ -40,6 +43,17 @@
 		<div class="columns">
 
 			<div class="column is-12-desktop">
+
+				{#if error}
+					<article class="message is-danger top">
+						<div class="message-header">
+							<p>Error</p>
+						</div>
+						<div class="message-body">
+							<p>{error}</p>
+						</div>
+					</article>
+				{/if}
 
 				{#each Object.keys(documentation[docType]) as element}
 
