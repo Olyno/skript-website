@@ -15,6 +15,7 @@
 				.replace(/(<\/pre\>)/g, '$1</div>')
 				.replace(/(<\/p\>)/g, '$1</div>')
 				.replace(/\<ul\>/g, '<ul class="is-list">')
+				.replace(/href="\#(.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}#$1" id="$1"`)
 		};
 		return { tutorial };
 	}
@@ -28,7 +29,18 @@
 
 	export let tutorial;
 
-	onMount(async () => setupColors())
+	let mounted;
+
+	$: if (mounted && window.location.hash) {
+		const id = window.location.hash.replace(/\#/g, '');
+		const element = document.getElementById(id);
+		element.scrollIntoView();
+	}
+
+	onMount(async () => {
+		setupColors();
+		mounted = true;
+	})
 
 </script>
 

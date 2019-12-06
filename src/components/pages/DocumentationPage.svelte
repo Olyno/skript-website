@@ -9,7 +9,16 @@
 	export let docType;
 
 	let searchValue = '',
+		docAmount = 0,
 		error;
+
+	$: if (docAmount === Object.keys(documentation[docType]).length) {
+		if (window.location.hash) {
+			const id = window.location.hash.replace(/\#/g, '');
+			const element = document.getElementById(id);
+			element.scrollIntoView();
+		}
+	}
 
 	async function setupListeners() {
 		document.getElementsByClassName('search-input')[0].addEventListener('keyup', async () => {
@@ -57,11 +66,11 @@
 
 				{#each Object.keys(documentation[docType]) as element}
 
-					<Card class="top" id={documentation[docType][element].id}>
+					<Card class="top" id={documentation[docType][element].id} on:mount={() => docAmount ++}>
 
 						<h1 slot="title" class="subtitle">
 							<strong>{documentation[docType][element].name}</strong>
-							<a href="#{documentation[docType][element].id}">#</a>
+							<a href="{window.location.href.replace(/\#.+/g, '')}#{documentation[docType][element].id}">#</a>
 						</h1>
 
 						<div slot="icon">
