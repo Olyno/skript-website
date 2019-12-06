@@ -1,4 +1,4 @@
-name: Build
+name: Build and deploy website
 
 on: [push]
 
@@ -37,7 +37,7 @@ jobs:
     
     - name: Deploy to GitHub Pages
       run: |
-        cd __sapper__/export__/skript-website
+        cd __sapper__/export/skript-website
         git init
         git config --global user.email "${EMAIL}"
         git remote add origin https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
