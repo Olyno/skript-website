@@ -18,21 +18,21 @@
 	<div class="navbar-menu {active ? "is-active" : ""}">
 		<a href="/" class="navbar-item">HOME</a>		
 		<div class="navbar-item has-dropdown is-hoverable">
-			<a href="/documentation" on:click|preventDefault class="navbar-link">DOCUMENTATION</a>
+			<a href="documentation" on:click|preventDefault class="navbar-link">DOCUMENTATION</a>
 			<div class="navbar-dropdown">
-				<a href="/documentation/events" class="navbar-item">EVENTS</a>
-				<a href="/documentation/conditions" class="navbar-item">CONDITIONS</a>
-				<a href="/documentation/effects" class="navbar-item">EFFECTS</a>
-				<a href="/documentation/expressions" class="navbar-item">EXPRESSIONS</a>
-				<a href="/documentation/types" class="navbar-item">TYPES</a>
-				<a href="/documentation/functions" class="navbar-item">FUNCTIONS</a>
+				<a href="documentation/events" class="navbar-item">EVENTS</a>
+				<a href="documentation/conditions" class="navbar-item">CONDITIONS</a>
+				<a href="documentation/effects" class="navbar-item">EFFECTS</a>
+				<a href="documentation/expressions" class="navbar-item">EXPRESSIONS</a>
+				<a href="documentation/types" class="navbar-item">TYPES</a>
+				<a href="documentation/functions" class="navbar-item">FUNCTIONS</a>
 			</div>
 		</div>
 		<div class="navbar-item has-dropdown is-hoverable">
-			<a href="/tutorials" class="navbar-link">TUTORIALS</a>
+			<a href="tutorials" class="navbar-link">TUTORIALS</a>
 			<div class="navbar-dropdown">
 				{#each Object.keys(tutorials) as tutorial}
-					<a href="/tutorials/{tutorial.toLowerCase().replace(/\s/gmui, '_')}" class="navbar-item">{tutorial.toUpperCase()}</a>
+					<a href="tutorials/{tutorial.toLowerCase().replace(/\s/gmui, '_')}" class="navbar-item">{tutorial.toUpperCase()}</a>
 				{/each}
 			</div>
 		</div>

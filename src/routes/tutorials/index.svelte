@@ -14,7 +14,7 @@
 								<tr>
 									<th>{tutorial}</th>
 									<td>{tutorials[tutorial].description}</td>
-									<td><a href="/tutorials/{tutorial.toLowerCase().replace(/\s/gmui, '_')}" class="card-footer-item button is-success">Read</a></td>
+									<td><a href="tutorials/{tutorial.toLowerCase().replace(/\s/gmui, '_')}" class="card-footer-item button is-success">Read</a></td>
 								</tr>
 							{/each}
 						</table>
