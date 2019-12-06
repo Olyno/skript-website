@@ -16,7 +16,7 @@
 		</a>
 	</div>
 	<div class="navbar-menu {active ? "is-active" : ""}">
-		<a href="/" class="navbar-item">HOME</a>		
+		<a href="/skript-website" class="navbar-item">HOME</a>		
 		<div class="navbar-item has-dropdown is-hoverable">
 			<a href="documentation" on:click|preventDefault class="navbar-link">DOCUMENTATION</a>
 			<div class="navbar-dropdown">
