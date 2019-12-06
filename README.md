@@ -17,6 +17,8 @@ To export the documentation, run these commands in your terminal:
 
 ```
 npm install
+git submodule init
+git submodule update
 npm run export
 ```
 
@@ -24,8 +26,12 @@ npm run export
 
 ```
 yarn
+git submodule init
+git submodule update
 yarn export
 ```
+
+Submodules will sync you to the public part, where tutorials and more stuff are.
 
 It will generate the website as static website at ``__sapper__/export``.
 
