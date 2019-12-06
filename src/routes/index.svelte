@@ -126,7 +126,12 @@
 							{#each Object.keys(developers) as devName}
 								<div class="column is-3">
 									<Card class="developer-card" withoutTitle={true} image="{developers[devName].avatar}">
-										<p><strong>{developers[devName].roles.join('\n')}</strong></p>
+										<div class="media">
+											<div class="media-content has-text-centered">
+												<a href="{developers[devName].github}" class="subtitle"><strong>{devName}</strong></a>
+											</div>
+										</div>
+										<p>{developers[devName].roles.join('\n')}</p>
 									</Card>
 								</div>
 							{/each}
