@@ -13,7 +13,11 @@
 </script>
 
 <style>
-	.top { margin-top: 4%; }
+	.content {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
 </style>
 
 <svelte:head>
@@ -22,7 +26,7 @@
 
 <Navbar />
 
-<main class="top">
+<main class="content">
 	<slot></slot>
 </main>
 
