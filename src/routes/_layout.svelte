@@ -3,13 +3,6 @@
 	import Navbar from '../components/Navbar.svelte';
 	import Footer from '../components/Footer.svelte';
 
-	$: if (process.browser) {
-		if (window.location.href.match(/#.+$/gmui)) {
-			const element = document.getElementById( window.location.href.replace(/^#/gmui, '') );
-			if (element) element.scrollIntoView();
-		}
-	}
-
 </script>
 
 <style>
