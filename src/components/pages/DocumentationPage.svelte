@@ -20,12 +20,26 @@
 		}
 	}
 
+	function hasNot(element, ...classNames) {
+		for (const className of classNames) {
+			if (element.classList.contains(className)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	async function setupListeners() {
 		document.getElementsByClassName('search-input')[0].addEventListener('keyup', async () => {
 			error = undefined;
 			search(searchValue)
 				.catch(() => error = 'Nothing found');
 		})
+		for (const element of document.getElementsByTagName('a')) {
+			if (hasNot(element, 'navbar-item', 'navbar-burger', 'navbar-link')) {
+				element.outerHTML = element.outerHTML.replace(/href="(\#.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}$1"`);
+			}
+		}
 	}
 
 	onMount(async () => {
@@ -70,7 +84,7 @@
 
 						<h1 slot="title" class="subtitle">
 							<strong>{documentation[docType][element].name}</strong>
-							<a href="{window.location.href.replace(/\#.+/g, '')}#{documentation[docType][element].id}">#</a>
+							<a href="#{documentation[docType][element].id}">#</a>
 						</h1>
 
 						<div slot="icon">
