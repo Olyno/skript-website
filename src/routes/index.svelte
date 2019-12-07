@@ -1,7 +1,14 @@
 <script>
 
+	import { onMount } from 'svelte';
+	import { setupEverything } from 'utils';
+
 	import Card from '../components/Card.svelte';
 	import developers from '../skript-website-public/developers.json';
+
+	onMount(async () => {
+		setupEverything();
+	})
 
 </script>
 

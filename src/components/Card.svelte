@@ -21,7 +21,13 @@
 <div class="card {clazz}" {id}>
 	{#if image !== ""}
 		<div class="card-image">
-			<img src="{image}" width={isSquare ? squareSize : ''} height={isSquare ? squareSize : ''} alt="Placeholder image">
+			<img 
+				src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+				width={isSquare ? squareSize : ''}
+				height={isSquare ? squareSize : ''}
+				data-src="{image}"
+				alt="Placeholder image"
+			/>
 		</div>
 	{/if}
 	<header class="card-header">

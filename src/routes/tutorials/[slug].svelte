@@ -25,7 +25,7 @@
 <script>
 
 	import { onMount } from 'svelte';
-	import { setupColors } from 'utils';
+	import { setupEverything } from 'utils';
 
 	export let tutorial;
 
@@ -38,7 +38,7 @@
 	}
 
 	onMount(async () => {
-		setupColors();
+		setupEverything();
 		mounted = true;
 	})
 
