@@ -1,16 +1,25 @@
 <script context="module">
     export async function preload(page, session) {
-        let urlValues;
-        let releaseHtml;
-		const res = await this.fetch('https://github.com/SkriptLang/Skript/releases/latest/', { mode: 'no-cors' });
-		if (res) {
-            urlValues = res.url.split('/');
-            releaseHtml = await res.text();
-        }
-		return {
-            latestVersion: urlValues[urlValues.length - 1] || 'error',
-            releaseHtml
-        };
+        return this.fetch('https://github.com/SkriptLang/Skript/releases/latest/', {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+            .then(res => {
+                return Promise.all([res.text(), res.url.split('/')]);
+            })
+            .then(([releaseHtml, urlValues]) => {
+                return {
+                    latestVersion: urlValues[urlValues.length - 1],
+                    releaseHtml
+                };
+            })
+            .catch(err => {
+                return {
+                    latestVersion: 'error',
+                    releaseHtml: ''
+                };
+            })
 	}
 </script>
 

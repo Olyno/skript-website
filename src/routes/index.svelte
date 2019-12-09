@@ -1,9 +1,13 @@
 <script context="module">
 	export async function preload(page, session) {
-		let urlValues;
-		const res = await this.fetch('https://github.com/SkriptLang/Skript/releases/latest/', { mode: 'no-cors' });
-		if (res) urlValues = res.url.split('/');
-		return { latestVersion: urlValues[urlValues.length - 1] || 'error' };
+		return this.fetch('https://github.com/SkriptLang/Skript/releases/latest/')
+			.then(res => {
+				const urlValues = res.url.split('/');
+				return { latestVersion: urlValues[urlValues.length - 1] };
+			})
+			.catch(err => {
+				return { latestVersion: 'error' }
+			})
 	}
 </script>
 
