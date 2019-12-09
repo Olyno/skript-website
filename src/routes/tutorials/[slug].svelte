@@ -9,13 +9,12 @@
 		const tutorial = {
 			title: firstLetterUpperCase(slug.replace(/_/g, ' ')),
 			content: tutorials[slug]
-				.replace(/\<h1\>/g, '<h1 class="title top">')
+				.replace(/\<h1\>/g, '<h1 class="title">')
 				.replace(/\<h2\>/g, '<h2 class="subtitle top">')
 				.replace(/(\<pre class="skript-code"\>)/g, '<div class="small-section">$1')
 				.replace(/(<\/pre\>)/g, '$1</div>')
 				.replace(/(<\/p\>)/g, '$1</div>')
 				.replace(/\<ul\>/g, '<ul class="is-list">')
-				.replace(/href="\#(.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}#$1" id="$1"`)
 		};
 		return { tutorial };
 	}
@@ -37,8 +36,26 @@
 		element.scrollIntoView();
 	}
 
+	function hasNot(element, ...classNames) {
+		for (const className of classNames) {
+			if (element.classList.contains(className)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	async function setupLinks() {
+		for (const element of document.getElementsByTagName('a')) {
+			if (hasNot(element, 'navbar-item', 'navbar-burger', 'navbar-link')) {
+				element.outerHTML = element.outerHTML.replace(/href="(\#.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}$1"`);
+			}
+		}
+	}
+
 	onMount(async () => {
 		setupEverything();
+		setupLinks();
 		mounted = true;
 	})
 
@@ -49,8 +66,12 @@
 </svelte:head>
 
 {#if tutorial.content}
-	<div class="container section is-white">
-		{@html tutorial.content}
+	<div class="section top">
+		<div class="is-white">
+			<div class="container section">
+				{@html tutorial.content}
+			</div>
+		</div>
 	</div>
 {:else}
 	<div class="has-text-centered">
