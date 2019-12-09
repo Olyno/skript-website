@@ -63,7 +63,10 @@
 								<div class="small-section is-yellow has-text-centered">
 									<div class="level">
 										<p class="level-item"><strong>Download latest</strong></p>
-										<a href="https://github.com/SkriptLang/Skript/releases/download/{latestVersion}/Skript.jar" class="button is-rounded level-item">{latestVersion}</a>
+										<a 
+											href="{latestVersion !== 'error' ? `https://github.com/SkriptLang/Skript/releases/download/${latestVersion}/Skript.jar` : 'https://github.com/SkriptLang/Skript/releases/latest/'}" 
+											class="button is-rounded level-item"
+										>{latestVersion === 'error' ? 'Latest' : latestVersion}</a>
 									</div>
 								</div>
 							</div>
