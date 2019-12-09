@@ -25,14 +25,15 @@
 
 <script>
 
-    import { onMount } from 'svelte';
+    import { afterUpdate } from 'svelte';
 
     export let latestVersion;
     export let releaseHtml;
 
     let releaseNote;
 
-    onMount(async () => {
+    afterUpdate(async () => {
+        if (latestVersion === 'error') return document.location.reload(true);
         releaseHtml = new DOMParser().parseFromString(releaseHtml, 'text/html');
         releaseNote = releaseHtml.getElementsByClassName('markdown-body')[0].innerHTML;
     })

@@ -13,7 +13,7 @@
 
 <script>
 
-	import { onMount } from 'svelte';
+	import { onMount, afterUpdate } from 'svelte';
 	import { setupEverything } from 'utils';
 
 	import Card from '../components/Card.svelte';
@@ -27,6 +27,10 @@
 
 	onMount(async () => {
 		setupEverything();
+	})
+
+	afterUpdate(async () => {
+		if (latestVersion === 'error') return document.location.reload(true);
 	})
 
 </script>
