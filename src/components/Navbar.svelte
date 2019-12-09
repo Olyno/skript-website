@@ -9,7 +9,7 @@
 
 <div class="navbar is-yellow is-fixed-top">
 	<div class="navbar-brand">
-		<a class="navbar-item" href="/skript-website">
+		<a class="navbar-item is-hidden-touch" href="/skript-website">
 			<img alt="Skript logo" src="favicon.png" width="55" height="30">
 		</a>
 		<a href="#!" on:click|preventDefault={() => active = !active} class="navbar-burger burger {active ? "is-active": ""}">
