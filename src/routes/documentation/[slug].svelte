@@ -9,7 +9,7 @@
 
 <script>
 
-	import { onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
 	import { search, firstLetterUpperCase, setupColors } from 'utils';
 	import documentation from '../../skript-website-public/docs.json';
 	
@@ -21,6 +21,10 @@
 		docAmount = 0,
 		error;
 
+	// ========== Reactive variable ==========
+
+	$: currentDocumentation = documentation[docType];
+	
 	// ========== Scroll to elements in url ==========
 
 	$: if (docAmount === Object.keys(documentation[docType]).length) {
@@ -58,6 +62,9 @@
 			search(searchValue)
 				.catch(() => error = 'Nothing found');
 		})
+	}
+
+	async function setupLinks() {
 		for (const element of document.getElementsByTagName('a')) {
 			if (hasNot(element, 'navbar-item', 'navbar-burger', 'navbar-link')) {
 				element.outerHTML = element.outerHTML.replace(/href="(\#.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}$1"`);
@@ -65,9 +72,10 @@
 		}
 	}
 
-	onMount(async () => {
+	afterUpdate(async () => {
 		setupListeners();
-		setupColors();
+		setupLinks();
+	//	setupColors();
 	})
 
 </script>
@@ -103,39 +111,39 @@
 						</article>
 					{/if}
 
-					{#each Object.keys(documentation[docType]) as element}
+					{#each currentDocumentation as element}
 
-						<Card class="top" id={documentation[docType][element].id} on:mount={() => docAmount ++}>
+						<Card class="top" id={element.id} on:mount={() => docAmount ++}>
 
 							<h1 slot="title" class="subtitle">
-								<strong>{documentation[docType][element].name}</strong>
-								<a href="#{documentation[docType][element].id}">#</a>
+								<strong>{element.name}</strong>
+								<a href="#{element.id}">#</a>
 							</h1>
 
 							<div slot="icon">
-								{#if documentation[docType][element].since}
-									<span class="tag is-large" style="background-color: rgb(97, 237, 120)">{documentation[docType][element].since}</span>
+								{#if element.since}
+									<span class="tag is-large" style="background-color: rgb(97, 237, 120)">{element.since}</span>
 								{/if}
 							</div>
 
-							{#if documentation[docType][element].description}
+							{#if element.description}
 								<label class="label">Description</label>
 								<div class="small-section">
-									<p>{documentation[docType][element].description}</p>
+									<p>{element.description}</p>
 								</div>
 							{/if}
 
-							{#if documentation[docType][element].patterns}
+							{#if element.patterns}
 								<label class="label">Patterns</label>
 								<div class="small-section">
-									<pre class="skript-code">{documentation[docType][element].patterns.join('\n')}</pre>
+									<pre class="skript-code">{element.patterns.join('\n')}</pre>
 								</div>
 							{/if}
 
-							{#if documentation[docType][element].examples}
+							{#if element.examples}
 								<label class="label">Example</label>
 								<div class="small-section">
-									<pre class="skript-code">{documentation[docType][element].examples.join('\n')}</pre>
+									<pre class="skript-code">{element.examples.join('\n')}</pre>
 								</div>
 							{/if}
 
