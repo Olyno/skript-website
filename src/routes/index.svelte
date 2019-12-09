@@ -1,3 +1,12 @@
+<script context="module">
+	export async function preload(page, session) {
+		let urlValues;
+		const res = await this.fetch('https://github.com/SkriptLang/Skript/releases/latest/', { mode: 'no-cors' });
+		if (res) urlValues = res.url.split('/');
+		return { latestVersion: urlValues[urlValues.length - 1] || 'error' };
+	}
+</script>
+
 <script>
 
 	import { onMount } from 'svelte';
@@ -5,6 +14,8 @@
 
 	import Card from '../components/Card.svelte';
 	import developers from '../skript-website-public/developers.json';
+
+	export let latestVersion;
 
 	onMount(async () => {
 		setupEverything();
@@ -38,11 +49,21 @@
 						
 						<div class="special-section">
 
+							{#if latestVersion === 'error'}
+								<div class="small-section">
+									<article class="message is-danger">
+										<div class="message-body">
+											<p>Can't get the latest version of Skript. Please refresh the page.</p>
+										</div>
+									</article>
+								</div>
+							{/if}
+
 							<div class="section">
 								<div class="small-section is-yellow has-text-centered">
 									<div class="level">
 										<p class="level-item"><strong>Download latest</strong></p>
-										<a href="https://github.com/SkriptLang/Skript/releases/download/2.3.7/Skript.jar" class="button is-rounded level-item">2.3.7</a>
+										<a href="https://github.com/SkriptLang/Skript/releases/download/{latestVersion}/Skript.jar" class="button is-rounded level-item">{latestVersion}</a>
 									</div>
 								</div>
 							</div>
@@ -100,11 +121,20 @@
 
 						<div class="small-section">
 							<Card class="has-yellow-border" withoutTitle={true}>
-								<div class="content">
+								<div class="content has-text-centered">
 									<span>
 										<i class="fab fa-github"></i>
-										<strong>View source code on <a href="https://github.com/SkriptLang/Skript">GitHub</a></strong>
+										<strong>View source codes on GitHub</strong>
 									</span>
+									<br><br>
+									<div class="level">
+										<div class="level-item">
+											<strong><a href="https://github.com/SkriptLang/Skript">Skript</a></strong>
+										</div>
+										<div class="level-item">
+											<strong><a href="https://github.com/Olyno/skript-website">Website</a></strong>
+										</div>
+									</div>
 								</div>
 							</Card>
 						</div>
