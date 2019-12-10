@@ -9,7 +9,7 @@
 
 <script>
 
-	import { afterUpdate } from 'svelte';
+	import { onMount } from 'svelte';
 	import { search, firstLetterUpperCase, setupColors } from 'utils';
 	import documentation from '../../skript-website-public/docs.json';
 	
@@ -72,7 +72,7 @@
 		}
 	}
 
-	afterUpdate(async () => {
+	onMount(async () => {
 		setupListeners();
 		setupLinks();
 	//	setupColors();
