@@ -19,6 +19,7 @@
 		</a>
 	</div>
 	<div class="navbar-menu {active ? "is-active" : ""}">
+		<a href="/skript-website" class="navbar-item is-hidden-desktop">HOME</a>
 		<div class="navbar-item has-dropdown is-hoverable">
 			<a href="documentation" on:click|preventDefault class="navbar-link">DOCUMENTATION</a>
 			<div class="navbar-dropdown">
