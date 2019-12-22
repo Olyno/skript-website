@@ -27,4 +27,4 @@
 
 </script>
 
-<HsvPicker on:colorChange={changeColor} startColor={$currentColor.backgroundColor} />
+<HsvPicker on:colorChange={changeColor} startColor={tinycolor($currentColor.backgroundColor).toHexString()} />
