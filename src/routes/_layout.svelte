@@ -2,6 +2,7 @@
 
 	import Navbar from '../components/Navbar.svelte';
 	import Footer from '../components/Footer.svelte';
+	import CookiesMessage from '../components/CookiesMessage.svelte';
 
 </script>
 
@@ -21,6 +22,7 @@
 
 <main class="content">
 	<slot></slot>
+	<CookiesMessage />
 </main>
 
 <Footer />
