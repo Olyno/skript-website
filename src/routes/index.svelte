@@ -15,6 +15,7 @@
 
 	import { onMount, afterUpdate } from 'svelte';
 	import { setupEverything } from 'utils';
+	import { currentColor } from '../stores';
 
 	import Card from '../components/Card.svelte';
 	import developers from '../skript-website-public/developers.json';
@@ -38,13 +39,17 @@
 <style>
 	.special-section { padding: 0rem 2rem 0rem 2rem; }
 	.main-title { font-size: 40px; justify-content: left; margin-left: 20px; }
+	.has-yellow-border {
+		border-style: solid;
+		border-width: 5px;
+	}
 </style>
 
 <svelte:head>
 	<title>Skript Website</title>
 </svelte:head>
 
-<section class="hero is-yellow is-fullheight">
+<section class="hero is-fullheight" style="background-color: {$currentColor.backgroundColor}">
 	<div class="hero-body">
 		<div class="container">
 
@@ -72,7 +77,7 @@
 							{/if}
 
 							<div class="section">
-								<div class="small-section is-yellow has-text-centered">
+								<div class="small-section has-text-centered" style="background-color: {$currentColor.backgroundColor}">
 									<div class="level">
 										<div class="level-item">
 											<p><strong>Download latest</strong></p>
@@ -111,50 +116,56 @@
 					<div class="column">
 						<div class="small-section">
 
-							<Card class="has-yellow-border" withoutTitle={true}>
-								<div class="content">
-									<p>
-										Found something incorrect in this documentation? Please report
-										it to the <a href="https://github.com/bensku/Skript/issues">issue tracker</a>.
-									</p>
-								</div>
-							</Card>
+							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
+								<Card withoutTitle={true}>
+									<div class="content">
+										<p>
+											Found something incorrect in this documentation? Please report
+											it to the <a href="https://github.com/bensku/Skript/issues">issue tracker</a>.
+										</p>
+									</div>
+								</Card>
+							</div>
 
 						</div>
 
 						<div class="small-section">
-							<Card class="has-yellow-border">
-								<h1 slot="title" class="subtitle"><strong>Looking for docs author!</strong></h1>
-								<div class="content">
-									<p>
-										Currently, the only documentation is generated automatically. It would be
-										nice to have some hand-written content such as tutorials on the docs as well. For example, currently we don't have
-										a tutorial on how to use loops here; This makes it harder for newcomers to learn.
-										Check <a href="https://github.com/bensku/Skript/issues/611">this issue</a> for
-										more details and if you're interested in helping out.
-									</p>
-								</div>
-							</Card>
+							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
+								<Card>
+									<h1 slot="title" class="subtitle"><strong>Looking for docs author!</strong></h1>
+									<div class="content">
+										<p>
+											Currently, the only documentation is generated automatically. It would be
+											nice to have some hand-written content such as tutorials on the docs as well. For example, currently we don't have
+											a tutorial on how to use loops here; This makes it harder for newcomers to learn.
+											Check <a href="https://github.com/bensku/Skript/issues/611">this issue</a> for
+											more details and if you're interested in helping out.
+										</p>
+									</div>
+								</Card>
+							</div>
 						</div>
 
 						<div class="small-section">
-							<Card class="has-yellow-border" withoutTitle={true}>
-								<div class="content has-text-centered">
-									<span>
-										<i class="fab fa-github"></i>
-										<strong>View source codes on GitHub</strong>
-									</span>
-									<br><br>
-									<div class="level">
-										<div class="level-item">
-											<strong><a href="https://github.com/SkriptLang/Skript">Skript</a></strong>
-										</div>
-										<div class="level-item">
-											<strong><a href="https://github.com/Olyno/skript-website">Website</a></strong>
+							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
+								<Card withoutTitle={true}>
+									<div class="content has-text-centered">
+										<span>
+											<i class="fab fa-github"></i>
+											<strong>View source codes on GitHub</strong>
+										</span>
+										<br><br>
+										<div class="level">
+											<div class="level-item">
+												<strong><a href="https://github.com/SkriptLang/Skript">Skript</a></strong>
+											</div>
+											<div class="level-item">
+												<strong><a href="https://github.com/Olyno/skript-website">Website</a></strong>
+											</div>
 										</div>
 									</div>
-								</div>
-							</Card>
+								</Card>
+							</div>
 						</div>
 
 					</div>

@@ -7,6 +7,7 @@
 	export let image = "";
 	export let withoutTitle = false;
 	export let isSquare = false;
+	export let style = "";
 	export { clazz as class };
 
 	const dispatch = createEventDispatcher();
@@ -18,7 +19,7 @@
 
 </script>
 
-<div class="card {clazz}" {id}>
+<div class="card {clazz}" {id} {style}>
 	{#if image !== ""}
 		<div class="card-image">
 			<img 

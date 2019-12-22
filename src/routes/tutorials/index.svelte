@@ -1,8 +1,9 @@
 <script>
 	import tutorials from '../../skript-website-public/tutorials.json';
+	import { currentColor } from '../../stores';
 </script>
 
-<section class="hero is-yellow is-fullheight">
+<section class="hero is-fullheight" style="background-color: {$currentColor.backgroundColor}">
 	<div class="hero-body">
 		<div class="container">
 			<div class="is-white">
