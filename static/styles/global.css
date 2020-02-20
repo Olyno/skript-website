@@ -3,7 +3,16 @@ html, body {
 	margin: 0;
 }
 
+/* Fix Cards size */
+.card {
+    display: flex;
+    flex-direction: column;
+	height: 100% !important;
+}
+.card-footer { margin-top: auto; }
+
 .navbar-item img { max-height: none !important; }
+strong { color: none !important; }
 
 .is-white { background-color: white; }
 .is-list { list-style: disc; margin-left: 4%; }
@@ -14,7 +23,6 @@ html, body {
 
 p, a { font-size: 17px; }
 
-.wrap { flex-wrap: wrap; }
 .developer-card { margin-bottom: 25px; }
 
 .tag:not(body) { border-radius: 0px 0px 0px 4px !important; }

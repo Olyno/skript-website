@@ -188,7 +188,7 @@
 				<div class="section">
 					<div class="small-section">
 						<h1 class="title">Developers</h1>
-						<div class="columns wrap has-text-centered">
+						<div class="columns is-multiline has-text-centered">
 							{#each Object.keys(developers) as devName}
 								<div class="column is-3">
 									<Card class="developer-card" isSquare={true} withoutTitle={true} image="{developers[devName].avatar}">
