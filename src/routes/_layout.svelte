@@ -1,18 +1,21 @@
 <script>
 
+	import { onMount } from 'svelte';
+	import { currentColors } from '../stores';
+
 	import Navbar from '../components/Navbar.svelte';
 	import Footer from '../components/Footer.svelte';
 	import CookiesMessage from '../components/CookiesMessage.svelte';
 
-</script>
+	let isMounted = false;
 
-<style>
-	.content {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
+	$: if (isMounted) {
+		document.getElementsByTagName('html')[0].style.backgroundColor = $currentColors.primaryColor;
 	}
-</style>
+
+	onMount(async () => isMounted = true);
+
+</script>
 
 <svelte:head>
 	<title>Skript Website</title>
@@ -20,7 +23,7 @@
 
 <Navbar />
 
-<main class="content">
+<main>
 	<slot></slot>
 	<CookiesMessage />
 </main>

@@ -26,6 +26,7 @@
 <script>
 
     import { afterUpdate } from 'svelte';
+    import { currentColors } from '../../stores';
 
     export let latestVersion;
     export let releaseHtml;
@@ -40,31 +41,27 @@
 
 </script>
 
-<div class="section top">
+<div class="section">
 
-    <div class="is-white">
+    <div style="color: {$currentColors.secondaryColor}">
 
-        <div class="container section">
+        <h1 class="title" style="color: {$currentColors.secondaryColor}">Latest version of Skript ({latestVersion})</h1>
+        
+        {#if latestVersion === 'error'}
+        
+            <div class="small-section">
+                <article class="message is-danger">
+                    <div class="message-body">
+                        <p>Can't get the latest version of Skript. Please refresh the page.</p>
+                    </div>
+                </article>
+            </div>
 
-            <h1 class="title">Latest version of Skript ({latestVersion})</h1>
-            
-            {#if latestVersion === 'error'}
-            
-                <div class="small-section">
-                    <article class="message is-danger">
-                        <div class="message-body">
-                            <p>Can't get the latest version of Skript. Please refresh the page.</p>
-                        </div>
-                    </article>
-                </div>
+        {:else}
 
-            {:else}
+            {@html releaseNote}
 
-                {@html releaseNote}
-
-            {/if}
-
-        </div>
+        {/if}
 
     </div>
 

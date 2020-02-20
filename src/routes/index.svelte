@@ -14,10 +14,11 @@
 <script>
 
 	import { onMount, afterUpdate } from 'svelte';
-	import { setupEverything } from 'utils';
-	import { currentColor } from '../stores';
+	import { setupImages } from 'utils';
+	import { currentColors } from '../stores';
 
-	import Card from '../components/Card.svelte';
+	import TextCard from '../components/Cards/TextCard.svelte';
+	import DevCard from '../components/Cards/DevCard.svelte';
 	import developers from '../skript-website-public/developers.json';
 
 	export let latestVersion;
@@ -27,7 +28,7 @@
 		: 'https://github.com/SkriptLang/Skript/releases/latest/';
 
 	onMount(async () => {
-		setupEverything();
+		setupImages();
 	})
 
 	afterUpdate(async () => {
@@ -49,18 +50,18 @@
 	<title>Skript Website</title>
 </svelte:head>
 
-<section class="hero is-fullheight" style="background-color: {$currentColor.backgroundColor}">
+<section class="hero is-fullheight" style="background-color: {$currentColors.primaryColor};">
 	<div class="hero-body">
 		<div class="container">
 
 			<div class="level" style="margin-top: 50px;">
 				<img class="level-item" src="favicon.png" alt="Skript icon" width="60px" style="max-width: 150px;">
-				<h1 class="main-title level-item">
+				<h1 class="main-title level-item" style="color: {$currentColors.secondaryColor}">
 					<strong>Documentation</strong>
 				</h1>
 			</div>
 
-			<div class="is-white">
+			<div style="background-color: {$currentColors.secondaryColor}; color: {$currentColors.primaryColor}">
 				<div class="columns">
 					<div class="column is-7">
 						
@@ -77,13 +78,14 @@
 							{/if}
 
 							<div class="section">
-								<div class="small-section has-text-centered" style="background-color: {$currentColor.backgroundColor}">
+								<div class="small-section has-text-centered" style="background-color: {$currentColors.primaryColor}">
 									<div class="level">
-										<div class="level-item">
+										<div class="level-item" style="color: {$currentColors.secondaryColor}">
 											<p><strong>Download latest</strong></p>
 										</div>
-										<div class="level-item button is-rounded" on:click={() => window.open(latestVersionLink)}>
+										<div class="level-item button is-rounded" style="background-color: {$currentColors.primaryColor}; color: {$currentColors.secondaryColor}; border-color: {$currentColors.secondaryColor}" on:click={() => window.open(latestVersionLink)}>
 											<a 
+												style="color: inherit"
 												href={latestVersionLink}
 											>{latestVersion === 'error' ? 'Latest' : latestVersion}</a>
 										</div>
@@ -116,39 +118,34 @@
 					<div class="column">
 						<div class="small-section">
 
-							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
-								<Card withoutTitle={true}>
-									<div class="content">
-										<p>
-											Found something incorrect in this documentation? Please report
-											it to the <a href="https://github.com/bensku/Skript/issues">issue tracker</a>.
-										</p>
-									</div>
-								</Card>
+							<div class="has-yellow-border">
+								<TextCard>
+									<p class="content">
+										Found something incorrect in this documentation? Please report
+										it to the <a href="https://github.com/bensku/Skript/issues">issue tracker</a>.
+									</p>
+								</TextCard>
 							</div>
 
 						</div>
 
 						<div class="small-section">
-							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
-								<Card>
-									<h1 slot="title" class="subtitle"><strong>Looking for docs author!</strong></h1>
-									<div class="content">
-										<p>
-											Currently, the only documentation is generated automatically. It would be
-											nice to have some hand-written content such as tutorials on the docs as well. For example, currently we don't have
-											a tutorial on how to use loops here; This makes it harder for newcomers to learn.
-											Check <a href="https://github.com/bensku/Skript/issues/611">this issue</a> for
-											more details and if you're interested in helping out.
-										</p>
-									</div>
-								</Card>
+							<div class="has-yellow-border">
+								<TextCard title="Looking for docs author!">
+									<p class="content">
+										Currently, the only documentation is generated automatically. It would be
+										nice to have some hand-written content such as tutorials on the docs as well. For example, currently we don't have
+										a tutorial on how to use loops here; This makes it harder for newcomers to learn.
+										Check <a href="https://github.com/bensku/Skript/issues/611">this issue</a> for
+										more details and if you're interested in helping out.
+									</p>
+								</TextCard>
 							</div>
 						</div>
 
 						<div class="small-section">
-							<div class="has-yellow-border" style="border-color: {$currentColor.backgroundColor}">
-								<Card withoutTitle={true}>
+							<div class="has-yellow-border">
+								<TextCard withoutTitle={true}>
 									<div class="content has-text-centered">
 										<span>
 											<i class="fab fa-github"></i>
@@ -164,7 +161,7 @@
 											</div>
 										</div>
 									</div>
-								</Card>
+								</TextCard>
 							</div>
 						</div>
 
@@ -189,16 +186,9 @@
 					<div class="small-section">
 						<h1 class="title">Developers</h1>
 						<div class="columns is-multiline has-text-centered">
-							{#each Object.keys(developers) as devName}
+							{#each developers as developer}
 								<div class="column is-3">
-									<Card class="developer-card" isSquare={true} withoutTitle={true} image="{developers[devName].avatar}">
-										<div class="media">
-											<div class="media-content has-text-centered">
-												<a href="{developers[devName].github}" class="subtitle"><strong>{devName}</strong></a>
-											</div>
-										</div>
-										<p>{developers[devName].roles.join('\n')}</p>
-									</Card>
+									<DevCard {developer} />
 								</div>
 							{/each}
 						</div>

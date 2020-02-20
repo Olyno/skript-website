@@ -11,10 +11,27 @@ html, body {
 }
 .card-footer { margin-top: auto; }
 
+/* Fix branding image size */
 .navbar-item img { max-height: none !important; }
-strong { color: none !important; }
 
-.is-white { background-color: white; }
+/* Fix default colors */
+strong { color: unset !important; }
+.subtitle { color: unset !important; }
+
+/* Remove ugly top border */
+.navbar-dropdown { border-top: none; }
+
+/* Fix positions */
+.title:not(.is-spaced)+.subtitle { margin-top: unset; }
+.navbar-menu { padding: unset }
+.navbar-burger { margin-left: unset; }
+
+@media screen and (max-width: 1023px) {
+	.navbar-menu.is-active {
+		margin-right: -50px
+	}
+}
+
 .is-list { list-style: disc; margin-left: 4%; }
 .top { margin-top: 3%; }
 .small-section { padding: 1rem 2rem; }
@@ -25,6 +42,5 @@ p, a { font-size: 17px; }
 
 .developer-card { margin-bottom: 25px; }
 
-.tag:not(body) { border-radius: 0px 0px 0px 4px !important; }
+.tag:not(body) { border-radius: 4px 4px 4px 4px !important; }
 .footer { padding: 2rem 1.5rem 2rem !important; flex-grow: 1; }
-.title:not(.is-spaced)+.subtitle { margin-top: 1.1428em !important; }

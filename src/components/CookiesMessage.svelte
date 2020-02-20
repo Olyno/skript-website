@@ -2,6 +2,7 @@
 
     import { fade } from 'svelte/transition';
     import Cookies from 'js-cookie';
+    import { currentColors } from '../stores';
 
     let isClosed = Cookies.get('preventCookies') !== undefined;
 
@@ -23,13 +24,13 @@
 </style>
 
 {#if !isClosed}
-    <div class="notification is-info cookieMessage" transition:fade="{{ duration: 2000 }}">
+    <div class="notification is-info cookieMessage" transition:fade="{{ duration: 1000 }}">
         <div class="level">
             <div class="level-item">
                 <p>This website uses cookies for color picker.</p>
             </div>
             <div class="level-item">
-                <button class="button is-success" on:click={closeCookiesMessage}>Got it!</button>
+                <button class="button" style="background-color: {$currentColors.primaryColor}; color: {$currentColors.secondaryColor}" on:click={closeCookiesMessage}>Got it!</button>
             </div>
         </div>
     </div>

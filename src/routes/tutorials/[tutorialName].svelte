@@ -3,18 +3,17 @@
 	import { firstLetterUpperCase } from 'utils';
 	
 	export async function preload({ params }) {
-		const { slug } = params;
+		const { tutorialName } = params;
 		const res = await this.fetch(`tutorials/getTutorials`);
 		const tutorials = await res.json();
 		const tutorial = {
-			title: firstLetterUpperCase(slug.replace(/_/g, ' ')),
-			content: tutorials[slug]
+			title: firstLetterUpperCase(tutorialName.replace(/_/g, ' ')),
+			content: tutorials[tutorialName]
 				.replace(/\<h1\>/g, '<h1 class="title">')
 				.replace(/\<h2\>/g, '<h2 class="subtitle top">')
-				.replace(/(\<pre class="skript-code"\>)/g, '<div class="small-section">$1')
-				.replace(/(<\/pre\>)/g, '$1</div>')
-				.replace(/(<\/p\>)/g, '$1</div>')
+				.replace(/\<pre\>/g, '<pre class="skript-code">')
 				.replace(/\<ul\>/g, '<ul class="is-list">')
+				.replace(/\<a href="#(\w+)"\>/g, '<a id="$1" href="#$1">')
 		};
 		return { tutorial };
 	}
@@ -23,12 +22,16 @@
 
 <script>
 
-	import { onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
 	import { setupEverything } from 'utils';
+	import { currentColors } from '../../stores';
 
 	export let tutorial;
 
 	let mounted;
+
+	tutorial.content = tutorial.content
+		.replace(/\<pre class="skript-code"\>/g, `<pre class="skript-code" style="background-color: ${$currentColors.primaryColor}; color: ${$currentColors.secondaryColor};">`)
 
 	$: if (mounted && window.location.hash) {
 		const id = window.location.hash.replace(/\#/g, '');
@@ -36,38 +39,24 @@
 		element.scrollIntoView();
 	}
 
-	function hasNot(element, ...classNames) {
-		for (const className of classNames) {
-			if (element.classList.contains(className)) {
-				return false;
-			}
+	afterUpdate(async () => {
+		if (!mounted) {
+			setupEverything()
+				.then(() => {
+					mounted = true;
+				})
 		}
-		return true;
-	}
-
-	async function setupLinks() {
-		for (const element of document.getElementsByTagName('a')) {
-			if (hasNot(element, 'navbar-item', 'navbar-burger', 'navbar-link')) {
-				element.outerHTML = element.outerHTML.replace(/href="(\#.+)"/g, `href="${window.location.href.replace(/\#.+/g, '')}$1"`);
-			}
-		}
-	}
-
-	onMount(async () => {
-		setupEverything();
-		setupLinks();
-		mounted = true;
 	})
 
 </script>
 
 <svelte:head>
-	<title>Tutorial: {tutorial.title} - Skript</title>
+	<title>Tutorial: {tutorial.title} - Skript Website</title>
 </svelte:head>
 
 {#if tutorial.content}
 	<div class="section top">
-		<div class="is-white">
+		<div style="background-color: {$currentColors.secondaryColor}; color: {$currentColors.primaryColor}">
 			<div class="container section">
 				{@html tutorial.content}
 			</div>

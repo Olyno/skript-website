@@ -1,21 +1,21 @@
 <script>
 	import tutorials from '../../skript-website-public/tutorials.json';
-	import { currentColor } from '../../stores';
+	import { currentColors } from '../../stores';
 </script>
 
-<section class="hero is-fullheight" style="background-color: {$currentColor.backgroundColor}">
+<section class="hero is-fullheight" style="background-color: {$currentColors.primaryColor}">
 	<div class="hero-body">
 		<div class="container">
 			<div class="is-white">
 				<div class="section">
-					<h1 class="title">Tutorials</h1>
+					<h1 class="title" style="color: {$currentColors.secondaryColor}">Tutorials</h1>
 
-						<table class="table is-bordered is-striped is-hoverable is-fullwidth">
-							{#each Object.keys(tutorials) as tutorial}
+						<table class="table is-bordered is-striped is-hoverable is-fullwidth" style="background-color: {$currentColors.secondaryColor}; color: {$currentColors.primaryColor}">
+							{#each tutorials as tutorial}
 								<tr>
-									<th>{tutorial}</th>
-									<td>{tutorials[tutorial].description}</td>
-									<td><a href="tutorials/{tutorial.toLowerCase().replace(/\s/gmui, '_')}" class="card-footer-item button is-success">Read</a></td>
+									<th>{tutorial.name}</th>
+									<td>{tutorial.description}</td>
+									<td><a href="tutorials/{tutorial.name.toLowerCase().replace(/\s/gmui, '_')}" class="card-footer-item button" style="background-color: {$currentColors.primaryColor}; color: {$currentColors.secondaryColor}">Read</a></td>
 								</tr>
 							{/each}
 						</table>

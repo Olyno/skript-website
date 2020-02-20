@@ -3,14 +3,7 @@
     import { HsvPicker } from 'svelte-color-picker';
     import tinycolor from 'tinycolor2';
     import Cookies from 'js-cookie';
-    import { currentColor } from '../stores';
-
-    if (!$currentColor.backgroundColor) {
-		$currentColor = {
-			color: Cookies.get('color') || 'black', 
-			backgroundColor: Cookies.get('backgroundColor') || '#d6de79'
-		}
-	}
+    import { currentColors, defaultColors } from '../stores';
 
 	async function changeColor(e) {
         const newColor = e.detail;
@@ -18,13 +11,12 @@
             .map(k => newColor[k])
             .filter(v => `${v}` === 'NaN')
             .length === 3;
-		const color = tinycolor(isGloballyNaN ? $currentColor.backgroundColor : newColor);
-		$currentColor.color = color.isDark() ? 'white' : 'black';
-        $currentColor.backgroundColor = color.toRgbString();
-        document.getElementsByTagName('html')[0].style.backgroundColor = $currentColor.backgroundColor;
-		Cookies.set('backgroundColor', $currentColor.backgroundColor);
+		const backgroundColor = tinycolor(isGloballyNaN ? $currentColors.primaryColor : newColor);
+		$currentColors.secondaryColor = backgroundColor.isDark() ? defaultColors.secondaryColor : defaultColors.primaryColor;
+        $currentColors.primaryColor = backgroundColor.toRgbString();
+        document.getElementsByTagName('html')[0].style.backgroundColor = $currentColors.primaryColor;
     }
 
 </script>
 
-<HsvPicker on:colorChange={changeColor} startColor={tinycolor($currentColor.backgroundColor).toHexString()} />
+<HsvPicker on:colorChange={changeColor} startColor={tinycolor($currentColors.primaryColor).toHexString()} />
