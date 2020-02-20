@@ -17,8 +17,8 @@
 	import { setupImages } from 'utils';
 	import { currentColors } from '../stores';
 
-	import TextCard from '../components/Cards/TextCard.svelte';
-	import DevCard from '../components/Cards/DevCard.svelte';
+	import TextCard from '../components/cards/TextCard.svelte';
+	import DevCard from '../components/cards/DevCard.svelte';
 	import developers from '../skript-website-public/developers.json';
 
 	export let latestVersion;
