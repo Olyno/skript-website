@@ -9,7 +9,7 @@
     "start": "node __sapper__/build"
   },
   "dependencies": {
-    "compression": "^1.7.1",
+    "compression": "^1.8.1",
     "js-cookie": "^2.2.1",
     "polka": "0.5.2",
     "showdown": "^2.0.0",
