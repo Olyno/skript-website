@@ -13,7 +13,7 @@
     "js-cookie": "^2.2.1",
     "polka": "0.5.2",
     "showdown": "^2.0.0",
-    "sirv": "^0.4.6",
+    "sirv": "^3.0.2",
     "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
